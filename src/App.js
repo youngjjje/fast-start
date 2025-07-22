@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Products from './Products.js';
+import MyButton from './MyButton.js'
+import CounterButton from './CounterButton.js';
+import { useState } from 'react';
 
 function App() {
+  const [products, setProducts] = useState(false)
+
+  const goToProducts = () => {
+    setProducts(true)
+  }
+
+  const goBack = () => {
+    setProducts(false)
+  }
+
+  const [sCount, setSCount] = useState(0)
+
+  function handleClick() {
+    setSCount(sCount + 1)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {products ? (<Products onBackClick={goBack}/>) : (<MyButton onButtonClick={goToProducts}/>
+      )}  
+
+      <h1>counters update</h1>
+      <CounterButton count={sCount} onClick={handleClick} />
+      <CounterButton count={sCount} onClick={handleClick} />
+    </>
   );
 }
 
